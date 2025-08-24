@@ -1,5 +1,8 @@
-.cache
-.vscode
-.VSCodeCounter
-build
-.clangd
+/*
+!/.gitignore
+!/src/
+!/tests/
+!/docs
+!/CMakeLists.txt
+!/README.md
+!.clang-format
