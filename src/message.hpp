@@ -1,9 +1,11 @@
 #pragma once
 #include <algorithm>
 #include <cstddef>
+#include <functional>
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace xclogger {
@@ -71,6 +73,10 @@ struct Message {
             msg.messages.emplace_back(std::move(str));
         }
         return msg;
+    }
+    static size_t hash(const std::vector<char>& data) {
+        return std::hash<std::string_view>{}(std::string_view(
+            reinterpret_cast<const char*>(data.data()), data.size()));
     }
 };
 template <class T = ImplCatgory>
