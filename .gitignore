@@ -6,3 +6,4 @@
 !/CMakeLists.txt
 !/README.md
 !.clang-format
+!xcloggerConfig.cmake.in

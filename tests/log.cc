@@ -1,9 +1,8 @@
 #include <gtest/gtest.h>
 
 #include <memory>
+#include <message.hpp>
 #include <ostream>
-
-#include "message.hpp"
 
 #define XCLOG_FUNCTION_TRACK
 #define XCLOG_FILE_TRACK

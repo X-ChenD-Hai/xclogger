@@ -1,0 +1,21 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# Find dependencies
+find_dependency(cppzmq REQUIRED)
+
+# Import targets
+include("${CMAKE_CURRENT_LIST_DIR}/xcloggerTargets.cmake")
+
+# Check if all required targets are available
+if(NOT TARGET xclogger::xclogger)
+    message(FATAL_ERROR "xclogger::xclogger target not found")
+endif()
+
+if(NOT TARGET xclogger::zmq_support)
+    message(FATAL_ERROR "xclogger::zmq_support target not found")
+endif()
+
+# Provide package information
+set(xclogger_VERSION @PROJECT_VERSION@)
