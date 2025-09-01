@@ -1,14 +1,15 @@
 #include <gtest/gtest.h>
 
 #include <memory>
-#include <message.hpp>
 #include <ostream>
+#include <xclogger/message.hpp>
+
 
 #define XCLOG_FUNCTION_TRACK
 #define XCLOG_FILE_TRACK
 #define XCLOG_LINE_TRACK
 
-#include <logger.hpp>
+#include <xclogger/logger.hpp>
 
 XCLOG_SUBMIT_STREAM_INSTENCE_IMPT() { return std::shared_ptr<std::ostream>(); }
 class IpcLogTest : public ::testing::Test {

@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 
-#include <asynczmqlogsubmitstream.hpp>
+#include <xclogger/asynczmqlogsubmitstream.hpp>
 #include <string>
-#include <zmqlogsubmitstream.hpp>
+#include <xclogger/zmqlogsubmitstream.hpp>
 
 #define XCLOG_FUNCTION_TRACK
 #define XCLOG_FILE_TRACK
 #define XCLOG_LINE_TRACK
 
-#include <logger.hpp>
+#include <xclogger/logger.hpp>
 
 XCLOG_ENABLE_ASYNCZMQLOGSUBMITSTREAM("tcp://127.0.0.1:5553")
 

@@ -79,7 +79,7 @@ auto SubmitStreamInstance() {
 
 #define XCLOG_SUBMIT_STREAM_INSTENCE_IMPT() \
     template <>                             \
-    auto ::xclogger::SubmitStreamInstance<::xclogger::ImplCatgory>()
+    inline auto ::xclogger::SubmitStreamInstance<::xclogger::ImplCatgory>()
 
 #define XLOG(level, role, label)                                             \
     ::xclogger::LogStream(                                                   \

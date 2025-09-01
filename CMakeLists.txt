@@ -10,8 +10,11 @@ find_package(cppzmq CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-add_subdirectory(src)
-add_subdirectory(tests)
+add_subdirectory(xclogger)
+option(BUILD_TESTS "Build tests" OFF)
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/xcloggerConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/xcloggerConfig.cmake

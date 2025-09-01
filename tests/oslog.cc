@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 
-#include <asyncostreamlogsubmitstream.hpp>
+#include <xclogger/asyncostreamlogsubmitstream.hpp>
 #include <ostream>
-#include <zmqlogsubmitstream.hpp>
+#include <xclogger/zmqlogsubmitstream.hpp>
 
 #define XCLOG_FUNCTION_TRACK
 #define XCLOG_FILE_TRACK
 #define XCLOG_LINE_TRACK
 
-#include <logger.hpp>
+#include <xclogger/logger.hpp>
 
 // XCLOG_ENABLE_ASYNCSTREAMLOGSUBMITSTREAM()
 XCLOG_ENABLE_ASYNCSTREAMLOGSUBMITSTREAM_WITH_PROXY(&std::cout, [](auto msg,
