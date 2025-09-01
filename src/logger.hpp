@@ -35,7 +35,7 @@ class LogStream {
         : submit_stream_(submit_stream),
           msg_(role, label, file, function,
                std::chrono::duration_cast<std::chrono::microseconds>(
-                   std::chrono::high_resolution_clock::now().time_since_epoch())
+                   std::chrono::system_clock::now().time_since_epoch())
                    .count(),
                GET_PID(), std::this_thread::get_id()._Get_underlying_id(), line,
                level, {}) {};

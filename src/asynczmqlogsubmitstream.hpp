@@ -1,8 +1,6 @@
 #pragma once
 #include <condition_variable>
-#include <iostream>
 #include <mutex>
-#include <ostream>
 #include <queue>
 #include <string>
 #include <thread>
@@ -27,7 +25,6 @@ class AsyncZmqLogSubmitStream {
             zmq::socket_t req{ctx, zmq::socket_type::req};
             req.connect(addr);
             req.set(zmq::sockopt::rcvtimeo, 2000);
-            std::cout << "bind:" << addr << std::endl;
             while (true) {
                 Message msg;
                 {
@@ -40,7 +37,6 @@ class AsyncZmqLogSubmitStream {
                     msg_queue_.pop();
                 }
                 std::vector<char> data = Message::encode(msg);
-                std::cout << "send:\n" << msg;
                 req.send(zmq::const_buffer(data.data(), data.size()),
                          zmq::send_flags::dontwait);
                 zmq::message_t reply;

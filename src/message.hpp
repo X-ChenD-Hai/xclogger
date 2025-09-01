@@ -94,7 +94,3 @@ inline std::ostream& operator<<(std::ostream& o, const Message& msg) {
     return o;
 }
 }  // namespace xclogger
-#define XCLOG_MSG_OSTREAM_IMPT(out_arg, msg_arg)                \
-    template <>                                                 \
-    std::ostream& xclogger::operator<< <xclogger::ImplCatgory>( \
-        std::ostream & out_arg, const Message& msg_arg)
