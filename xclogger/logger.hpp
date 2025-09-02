@@ -8,12 +8,33 @@
 #include <vector>
 #ifdef _WIN32
 #include <process.h>
-#define GET_PID() _getpid()
-#else
-#include <unistd.h>
-#define GET_PID() getpid()
-#endif
+
 #include <thread>
+
+#define GET_PID() _getpid()
+#define GET_TID() std::this_thread::get_id()._Get_underlying_id()
+
+#elif defined(__linux__)
+#include <sys/syscall.h>
+#include <unistd.h>
+
+#define GET_PID() getpid()
+#define GET_TID() static_cast<unsigned long>(syscall(SYS_gettid))
+
+#elif defined(__APPLE__)
+#include <pthread.h>
+#include <unistd.h>
+
+#define GET_PID() getpid()
+static inline unsigned long GET_TID() {
+    uint64_t tid;
+    pthread_threadid_np(nullptr, &tid);
+    return static_cast<unsigned long>(tid);
+}
+
+#else
+#error "Unsupported platform"
+#endif
 
 #include "./message.hpp"
 
@@ -37,8 +58,7 @@ class LogStream {
                std::chrono::duration_cast<std::chrono::microseconds>(
                    std::chrono::system_clock::now().time_since_epoch())
                    .count(),
-               GET_PID(), std::this_thread::get_id()._Get_underlying_id(), line,
-               level, {}) {};
+               GET_PID(), GET_TID(), line, level, {}){};
     ~LogStream() {
         if (submit_stream_) {
             if constexpr (std::is_same_v<SubmitStream_ptr,
