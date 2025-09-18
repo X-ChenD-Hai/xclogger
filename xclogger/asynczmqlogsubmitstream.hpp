@@ -37,11 +37,15 @@ class AsyncZmqLogSubmitStream {
                     msg_queue_.pop();
                 }
                 std::vector<char> data = Message::encode(msg);
-                req.send(zmq::const_buffer(data.data(), data.size()),
-                         zmq::send_flags::dontwait);
-                zmq::message_t reply;
-                if (req.recv(reply, zmq::recv_flags::none)) {
-                } else {
+                try{
+                    req.send(zmq::const_buffer(data.data(), data.size()),
+                             zmq::send_flags::dontwait);
+                    zmq::message_t reply;
+                    if (req.recv(reply, zmq::recv_flags::none)) {
+                    } else {
+                    }
+                }catch(const zmq::error_t& e){
+                    std::cerr << "zmq error: " << e.what() << std::endl;
                 }
             }
             req.close();
